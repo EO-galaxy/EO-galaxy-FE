@@ -2,8 +2,10 @@ import { Helmet } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
 import { supabase } from "../supabase/supabase";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Onboarding() {
+  const navigate = useNavigate();
   const { t, i18n } = useTranslation();
   const languages = [
     { code: "en", name: "English" },
@@ -56,6 +58,7 @@ function Onboarding() {
       </Helmet>
       <main>
         Onboarding
+        <button onClick={() => navigate("/intro")}>Intro 이동</button>
         <button onClick={() => handleShareLink()}>링크 공유하기</button>
         <h2>{t("hello")}</h2>
         {languages.map((language) => (
