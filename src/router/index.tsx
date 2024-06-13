@@ -5,22 +5,26 @@ import { Onboarding } from "../Onboarding";
 import { Home } from "../Home";
 import Intro from "../Intro/Intro";
 
-export const router = createBrowserRouter([
-  {
-    element: <Layout />,
-    children: [
-      {
-        path: "/",
-        element: <Onboarding />,
-      },
-      {
-        path: "/intro",
-        element: <Intro />,
-      },
-      {
-        path: "/home",
-        element: <Home />,
-      },
-    ],
-  },
-]);
+export const router = createBrowserRouter(
+  [
+    {
+      element: <Layout />,
+      path: "/",
+      children: [
+        {
+          index: true,
+          element: <Onboarding />,
+        },
+        {
+          path: "/intro",
+          element: <Intro />,
+        },
+        {
+          path: "/home",
+          element: <Home />,
+        },
+      ],
+    },
+  ],
+  { basename: "/" },
+);
