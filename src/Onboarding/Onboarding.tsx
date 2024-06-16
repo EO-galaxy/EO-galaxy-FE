@@ -1,83 +1,67 @@
+/** @jsxImportSource @emotion/react */
+import { css } from "@emotion/react";
 import { Helmet } from "react-helmet-async";
-import { useTranslation } from "react-i18next";
-import { supabase } from "../supabase/supabase";
-import { useEffect, useState } from "react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 function Onboarding() {
   const navigate = useNavigate();
-  const { t, i18n } = useTranslation();
-  const languages = [
-    { code: "en", name: "English" },
-    { code: "ko", name: "Korean" },
-  ];
+  const { t } = useTranslation();
 
-  const [translationData, setTranslationData] = useState<Translation[]>();
+  const titleText = t("onboarding_title");
 
-  type Translation = {
-    id: string;
-    title: string;
-    content: string;
-  };
+  useGSAP(() => {
+    gsap.to("#button", {
+      duration: 1,
+      scale: 1.2,
+      repeat: -1,
+      yoyo: true,
+    });
+  });
 
-  async function getTranslation() {
-    const { data } = await supabase.from("translations").select("*");
-
-    if (!data) {
-      return;
-    }
-
-    setTranslationData(data);
-  }
-
-  useEffect(() => {
-    getTranslation();
-  }, []);
-
-  async function handleShareLink() {
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: "EO Galaxy",
-          text: "EO Galaxy",
-          url: "https://eo-galaxy.vercel.app/",
-        });
-        console.log("Success share link");
-      } catch (error) {
-        console.error("Error sharing link", error);
-      }
-    } else {
-      console.error("Web Share API is not supported in this browser.");
-      alert("링크 공유 기능이 지원되지 않는 브라우저입니다.");
-    }
-  }
   return (
-    <div>
+    <>
       <Helmet>
-        <title>EO Onboarding</title>
+        <title>EO | 종강 운세</title>
       </Helmet>
-      <main>
-        Onboarding
-        <button onClick={() => navigate("/intro")}>Intro 이동</button>
-        <button onClick={() => handleShareLink()}>링크 공유하기</button>
-        <h2>{t("hello")}</h2>
-        {languages.map((language) => (
-          <button
-            key={language.code}
-            onClick={() => i18n.changeLanguage(language.code)}
-          >
-            {language.name}
-          </button>
-        ))}
-        {translationData?.map((data) => (
-          <div key={data.id}>
-            <h3>{data.title}</h3>
-            <p>{data.content}</p>
-          </div>
-        ))}
+      <main css={OnboardingStyles}>
+        <h1 css={TitleStyles}>{titleText}</h1>
+        <button
+          id="button"
+          css={ButtonStyles}
+          onClick={() => navigate("/intro")}
+        />
       </main>
-    </div>
+    </>
   );
 }
 
 export default Onboarding;
+
+const OnboardingStyles = css`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+`;
+
+const TitleStyles = css`
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-primary);
+  white-space: pre-line;
+  text-align: center;
+  line-height: 1.3;
+`;
+
+const ButtonStyles = css`
+  width: 100px;
+  height: 100px;
+  border-radius: 8px;
+  border: 1px solid white;
+  background-color: rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+`;
