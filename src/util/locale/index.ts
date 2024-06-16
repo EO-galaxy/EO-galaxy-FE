@@ -1,24 +1,60 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
+import { supabase } from "../supabase/supabase";
 
-i18n.use(initReactI18next).init({
-  debug: true,
-  fallbackLng: "ko",
-  interpolation: {
-    escapeValue: false,
-  },
-  resources: {
+// Supabase에서 번역 데이터를 가져오는 함수
+async function fetchTranslations() {
+  const { data, error } = await supabase.from("translations").select("*");
+
+  if (error) {
+    console.error("Error fetching translations:", error.message);
+    return null;
+  }
+
+  return data;
+}
+
+// i18n에 번역 데이터를 추가하는 함수
+async function addTranslationsToI18n() {
+  const translations = await fetchTranslations();
+  if (!translations) return;
+
+  const resources = {
     en: {
-      translation: {
-        hello: "hello",
-      },
+      translation: {},
     },
     ko: {
-      translation: {
-        hello: "안녕하세요",
-      },
+      translation: {},
+    },
+  };
+
+  translations.forEach(({ id, en, ko }) => {
+    // @ts-ignore
+    resources.en.translation[id] = en;
+    // @ts-ignore
+    resources.ko.translation[id] = ko;
+  });
+
+  i18n.init({
+    debug: true,
+    fallbackLng: "ko",
+    interpolation: {
+      escapeValue: false,
+    },
+    resources,
+  });
+}
+
+// i18n 초기화 및 번역 데이터 추가
+i18n.use(initReactI18next).init(
+  {
+    debug: true,
+    fallbackLng: "ko",
+    interpolation: {
+      escapeValue: false,
     },
   },
-});
+  addTranslationsToI18n,
+);
 
 export default i18n;
