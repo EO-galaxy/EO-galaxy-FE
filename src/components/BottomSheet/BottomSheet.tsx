@@ -26,7 +26,7 @@ const BottomSheet: React.FC<BottomSheetProps> = ({
   return (
     <>
       <div css={OverlayStyles(isOpen)} onClick={onClose} />
-      <div css={BottomSheeetStyles(isOpen)}>{children}</div>
+      <div css={BottomSheetStyles(isOpen)}>{children}</div>
     </>
   );
 };
@@ -44,7 +44,7 @@ const OverlayStyles = (isOpen: boolean) => css`
   z-index: 999;
 `;
 
-const BottomSheeetStyles = (isOpen: boolean) => css`
+const BottomSheetStyles = (isOpen: boolean) => css`
   position: fixed;
   left: 50%;
   transform: translateX(-50%);
