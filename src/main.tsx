@@ -6,7 +6,7 @@ import "./util/locale/index";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Layout } from "./Layout";
 import { Onboarding } from "./Onboarding";
-import Intro from "./Intro/Intro";
+import { Intro } from "./Intro";
 import { Home } from "./Home";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
