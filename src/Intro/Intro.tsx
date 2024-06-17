@@ -59,7 +59,7 @@ function Intro() {
   const [randomNumber, setRandomNumber] = useState<number | null>(null);
 
   const generateRandomNumber = () => {
-    const number = getRandomNumber(1, 100);
+    const number = getRandomNumber(50, 100);
     setRandomNumber(number);
   };
 
@@ -140,6 +140,7 @@ function Intro() {
 export default Intro;
 
 const IntroStyles = css`
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;

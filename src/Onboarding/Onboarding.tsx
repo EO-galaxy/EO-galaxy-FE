@@ -41,6 +41,7 @@ function Onboarding() {
 export default Onboarding;
 
 const OnboardingStyles = css`
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
