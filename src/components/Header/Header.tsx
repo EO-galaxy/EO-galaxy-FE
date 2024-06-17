@@ -86,7 +86,6 @@ const HeaderButtomStyles = css`
   align-items: center;
   height: 66.2px;
   padding: 0px 30px;
-  width: ( 100% - 60px);
   background-color: var(--bg-secondary);
 `;
 
