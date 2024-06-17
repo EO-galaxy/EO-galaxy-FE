@@ -3,6 +3,7 @@ import { css } from "@emotion/react";
 import { HelmetProvider } from "react-helmet-async";
 import { Outlet } from "react-router-dom";
 import { Header } from "../components/Header";
+import { Footer } from "../components/Footer";
 
 export default function Layout() {
   const helmetContext = {};
@@ -12,6 +13,7 @@ export default function Layout() {
       <div css={LayoutStyles}>
         <Outlet />
       </div>
+      <Footer />
     </HelmetProvider>
   );
 }
