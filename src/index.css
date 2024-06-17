@@ -10,6 +10,14 @@
   --text-tertiary: #1c1c20;
 }
 
+/* 글꼴 */
+@font-face {
+  font-family: 'Ownglyph_ryurue-Rg';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2405-2@1.0/Ownglyph_ryurue-Rg.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
 /* reset css */
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
