@@ -1,13 +1,20 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router-dom";
 import { BottomSheet } from "../components/BottomSheet";
 import { useTranslation } from "react-i18next";
+import CountUp from "react-countup";
+import { getRandomNumber } from "../util/getRandomNumber";
+import VideoItem from "./components/VideoItem";
+import { getRandomVideo } from "../util/getRandomVideo";
 
 function Intro() {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+
+  // 바텀 시트
   const [isBottomSheetOpen, setBottomSheetOpen] = useState(false);
 
   const openBottomSheet = () => {
@@ -18,8 +25,7 @@ function Intro() {
     setBottomSheetOpen(false);
   };
 
-  const navigate = useNavigate();
-
+  // 공유하기
   async function handleShareLink() {
     if (navigator.share) {
       try {
@@ -49,13 +55,49 @@ function Intro() {
     }
   };
 
+  // 운세
+  const [randomNumber, setRandomNumber] = useState<number | null>(null);
+
+  const generateRandomNumber = () => {
+    const number = getRandomNumber(1, 100);
+    setRandomNumber(number);
+  };
+
+  useEffect(() => {
+    generateRandomNumber();
+  }, []);
+
+  // 랜덤 비디오
+  const randomVideo = getRandomVideo();
+
   return (
     <>
       <Helmet>
         <title>Intro</title>
       </Helmet>
       <main css={IntroStyles}>
-        Intro
+        <section css={FortuneContainerStyles}>
+          <h1 css={TitleStyles}>{t("intro_fortune_title")}</h1>
+          {/* 운세 */}
+          <CountUp
+            end={Number(randomNumber)}
+            css={FortuneStyles}
+          />
+        </section>
+        <section css={VideoContainerStyles}>
+          <h2 css={VideoTitleStyles}>
+            {t("intro_video_title")}
+          </h2>
+          <p css={VideoDescriptionStyles}>
+            {t("intro_video_description")}
+          </p>
+          <VideoItem
+            imageSrc={randomVideo.imgSrc}
+            description={randomVideo.description}
+            link={randomVideo.link}
+          />
+        </section>
+        {/* 공유하기 버튼 */}
         <div css={ButtonContainerStyles}>
           <button onClick={() => handleShareLink()} css={ButtonStyles}>
             <img src="/svg/link.svg" alt="link" />
@@ -65,6 +107,7 @@ function Intro() {
             {t("intro_secondary_button")}
           </p>
         </div>
+        {/* 바텀시트 */}
         <div>
           <BottomSheet isOpen={isBottomSheetOpen} onClose={closeBottomSheet}>
             <div css={BottomSheetContentStyles}>
@@ -102,8 +145,65 @@ const IntroStyles = css`
   justify-content: center;
   align-items: center;
   gap: 40px;
+  margin-top: 20px;
+  padding: 0 20px;
 `;
 
+// 운세
+const FortuneContainerStyles = css`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+`;
+
+const TitleStyles = css`
+  text-align: center;
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--text-primary);
+  @media (max-width: 768px) {
+    font-size: 24px;
+  }
+`;
+
+const FortuneStyles = css`
+  font-size: 100px;
+  color: var(--text-primary);
+  @media (max-width: 768px) {
+    font-size: 50px;
+  }
+`;
+
+// 비디오
+const VideoContainerStyles = css`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+`;
+
+const VideoTitleStyles = css`
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text-primary);
+  @media (max-width: 768px) {
+    font-size: 18px;
+  }
+`;
+
+const VideoDescriptionStyles = css`
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-primary);
+  @media (max-width: 768px) {
+    font-size: 12px;
+  }
+`;
+
+// 공유하기 버튼
 const ButtonContainerStyles = css`
   display: flex;
   flex-direction: column;
