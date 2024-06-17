@@ -23,7 +23,7 @@ function Header() {
   return (
     <>
       <div css={HeaderStyles}>
-        <div css={HeaderButtomStyles}>
+        <div css={HeaderButtonStyles}>
           <img
             src="/logo.png"
             alt="logo"
@@ -80,7 +80,7 @@ const HeaderStyles = css`
   z-index: 10;
 `;
 
-const HeaderButtomStyles = css`
+const HeaderButtonStyles = css`
   display: flex;
   justify-content: space-between;
   align-items: center;

@@ -13,6 +13,14 @@ function Onboarding() {
   const titleText = t("onboarding_title");
 
   useGSAP(() => {
+    gsap.fromTo(
+      "#title-animation",
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 1, ease: "power3.out" }
+    );
+  }, []); 
+
+  useGSAP(() => {
     gsap.to("#button", {
       duration: 1,
       scale: 1.2,
@@ -27,7 +35,7 @@ function Onboarding() {
         <title>EO | 종강 운세</title>
       </Helmet>
       <main css={OnboardingStyles}>
-        <h1 css={TitleStyles}>{titleText}</h1>
+        <h1 id="title-animation" css={TitleStyles}>{titleText}</h1>
         <button
           id="button"
           css={ButtonStyles}

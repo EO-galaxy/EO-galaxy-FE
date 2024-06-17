@@ -9,10 +9,20 @@ import CountUp from "react-countup";
 import { getRandomNumber } from "../util/getRandomNumber";
 import VideoItem from "./components/VideoItem";
 import { getRandomVideo } from "../util/getRandomVideo";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 
 function Intro() {
   const { t } = useTranslation();
   const navigate = useNavigate();
+
+  useGSAP(() => {
+    gsap.fromTo(
+      ".animation",
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 1, ease: "power3.out" },
+    );
+  }, []);
 
   // 바텀 시트
   const [isBottomSheetOpen, setBottomSheetOpen] = useState(false);
@@ -77,21 +87,21 @@ function Intro() {
       </Helmet>
       <main css={IntroStyles}>
         <section css={FortuneContainerStyles}>
-          <h1 css={TitleStyles}>{t("intro_fortune_title")}</h1>
+          <h1 className="animation" css={TitleStyles}>
+            {t("intro_fortune_title")}
+          </h1>
           {/* 운세 */}
-          <CountUp
-            end={Number(randomNumber)}
-            css={FortuneStyles}
-          />
+          <CountUp end={Number(randomNumber)} css={FortuneStyles} />
         </section>
         <section css={VideoContainerStyles}>
-          <h2 css={VideoTitleStyles}>
+          <h2 className="animation" css={VideoTitleStyles}>
             {t("intro_video_title")}
           </h2>
-          <p css={VideoDescriptionStyles}>
+          <p className="animation" css={VideoDescriptionStyles}>
             {t("intro_video_description")}
           </p>
           <VideoItem
+            className="animation"
             imageSrc={randomVideo.imgSrc}
             description={randomVideo.description}
             link={randomVideo.link}
@@ -99,11 +109,19 @@ function Intro() {
         </section>
         {/* 공유하기 버튼 */}
         <div css={ButtonContainerStyles}>
-          <button onClick={() => handleShareLink()} css={ButtonStyles}>
+          <button
+            className="animation"
+            onClick={() => handleShareLink()}
+            css={ButtonStyles}
+          >
             <img src="/svg/link.svg" alt="link" />
             {t("intro_primary_button")}
           </button>
-          <p onClick={() => navigate("/home")} css={LinkButtonStyles}>
+          <p
+            className="animation"
+            onClick={() => navigate("/home")}
+            css={LinkButtonStyles}
+          >
             {t("intro_secondary_button")}
           </p>
         </div>

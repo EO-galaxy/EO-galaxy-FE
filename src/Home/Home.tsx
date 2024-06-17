@@ -9,12 +9,21 @@ import Carousel from "./components/Carousel";
 
 import useIsMobile from "../hook/useIsMobile";
 import { getRandomNumber } from "../util/getRandomNumber";
+import { useGSAP } from "@gsap/react";
 
 function Home() {
   const isMobile = useIsMobile();
   const carouselSectionRef = useRef<HTMLElement>(null);
   const { t, i18n } = useTranslation();
   const [bubbleSizes, setBubbleSizes] = useState<number[]>([]);
+
+  useGSAP(() => {
+    gsap.fromTo(
+      ".animation",
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 1, ease: "power3.out" },
+    );
+  }, []);
 
   useEffect(() => {
     const sizes = Array.from({ length: 10 }).map(() => Math.random() * 80 + 20);
@@ -103,8 +112,12 @@ function Home() {
       <main css={HomeStyles}>
         {/* 비눗방울 화면 */}
         <section css={bubbleSectionStyles}>
-          <h1 css={TitleStyles}>{t("home_title")}</h1>
-          <p css={SubTitleStyles}>{t("home_subtitle")}</p>
+          <h1 className="animation" css={TitleStyles}>
+            {t("home_title")}
+          </h1>
+          <p className="animation" css={SubTitleStyles}>
+            {t("home_subtitle")}
+          </p>
           {floatingBubbles}
           <div
             style={{
@@ -114,7 +127,7 @@ function Home() {
               alignItems: "center",
             }}
           >
-            <button onClick={handleScrollToCarousel}>
+            <button className="animation" onClick={handleScrollToCarousel}>
               <img
                 src="/svg/scroll.svg"
                 alt="scroll"
@@ -126,6 +139,7 @@ function Home() {
         {/* 캐러셀 화면 */}
         <section css={carouselSectionStyles} ref={carouselSectionRef}>
           <h1
+            className="animation"
             css={carouselTitleStyles}
             dangerouslySetInnerHTML={getCarouselTitleHTML()}
           />

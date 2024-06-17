@@ -2,6 +2,7 @@
 import { css } from "@emotion/react";
 
 interface VideoItemProps {
+  className: string;
   imageSrc: string;
   description: string;
   link: string;
