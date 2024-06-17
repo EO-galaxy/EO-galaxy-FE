@@ -23,18 +23,21 @@ function Header() {
   return (
     <>
       <div css={HeaderStyles}>
-        <img
-          src="/logo.png"
-          alt="logo"
-          style={{ width: "28px", height: "28px" }}
-        />
-        <img
-          onClick={openBottomSheet}
-          src="/svg/language.svg"
-          alt="language"
-          style={{ width: "20px", height: "20px", cursor: "pointer" }}
-        />
+        <div css={HeaderButtomStyles}>
+          <img
+            src="/logo.png"
+            alt="logo"
+            style={{ width: "28px", height: "28px" }}
+          />
+          <img
+            onClick={openBottomSheet}
+            src="/svg/language.svg"
+            alt="language"
+            style={{ width: "20px", height: "20px", cursor: "pointer" }}
+          />
+        </div>
       </div>
+      {/* 바텀시트 */}
       <BottomSheet isOpen={isBottomSheetOpen} onClose={closeBottomSheet}>
         <div css={BottomSheetContentStyles}>
           <header css={BottomSheetHeaderStyles}>
@@ -69,21 +72,22 @@ function Header() {
 export default Header;
 
 const HeaderStyles = css`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--bg-secondary);
+  z-index: 10;
+`;
+
+const HeaderButtomStyles = css`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0px 130px;
   height: 66.2px;
-  width: 100vw;
+  padding: 0px 30px;
+  width: ( 100% - 60px);
   background-color: var(--bg-secondary);
-
-  position: absolute;
-  top: 0;
-  left: 0;
-
-  @media (max-width: 768px) {
-    padding: 0px 15px;
-  }
 `;
 
 const BottomSheetContentStyles = css`
@@ -105,6 +109,8 @@ const BottomSheetSectionStyles = css`
 
 const LanguageButtonStyles = css`
   width: 100%;
+  border: none;
+  background-color: transparent;
   cursor: pointer;
   font-size: 18px;
   font-weight: 500;

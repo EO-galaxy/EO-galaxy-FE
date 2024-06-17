@@ -8,8 +8,8 @@ export default function Layout() {
   const helmetContext = {};
   return (
     <HelmetProvider context={helmetContext}>
+      <Header />
       <div css={LayoutStyles}>
-        <Header />
         <Outlet />
       </div>
     </HelmetProvider>
