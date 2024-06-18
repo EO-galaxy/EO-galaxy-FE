@@ -9,11 +9,11 @@ export default function Layout() {
   const helmetContext = {};
   return (
     <HelmetProvider context={helmetContext}>
-      <Header />
       <div css={LayoutStyles}>
+        <Header />
         <Outlet />
+        <Footer />
       </div>
-      <Footer />
     </HelmetProvider>
   );
 }
@@ -23,6 +23,6 @@ const LayoutStyles = css`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100vw;
+  width: 100%;
   background-color: var(--bg-secondary);
 `;
