@@ -11,8 +11,10 @@ import VideoItem from "./components/VideoItem";
 import { getRandomVideo } from "../util/getRandomVideo";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import useIsEvenTime from "../hook/useEvenTime";
 
 function Intro() {
+  const isEvenTime = useIsEvenTime();
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -99,25 +101,47 @@ function Intro() {
           />
         </section>
         {/* 공유하기 버튼 */}
-        <div css={ButtonContainerStyles}>
-          <button
-            id="shareLinkButton"
-            className="animation"
-            onClick={() => handleShareLink()}
-            css={ButtonStyles}
-          >
-            <img src="/svg/link.svg" alt="link" />
-            {t("intro_primary_button")}
-          </button>
-          <p
-            id="moveToHomeButton"
-            className="animation"
-            onClick={() => navigate("/home")}
-            css={LinkButtonStyles}
-          >
-            {t("intro_secondary_button")}
-          </p>
-        </div>
+        {isEvenTime ? (
+          <div css={ButtonContainerStyles}>
+            <button
+              id="shareLinkButton"
+              className="animation"
+              onClick={() => handleShareLink()}
+              css={ButtonStyles}
+            >
+              <img src="/svg/link.svg" alt="link" />
+              {t("intro_primary_button")}
+            </button>
+            <p
+              id="moveToHomeButton"
+              className="animation"
+              onClick={() => navigate("/home")}
+              css={LinkButtonStyles}
+            >
+              {t("intro_secondary_button")}
+            </p>
+          </div>
+        ) : (
+          <div css={ButtonContainerStyles}>
+            <button
+              id="subShareLinkButton"
+              className="animation"
+              onClick={() => navigate("/home")}
+              css={ButtonStyles}
+            >
+              {t("intro_secondary_button")}
+            </button>
+            <p
+              id="subMoveToHomeButton"
+              className="animation"
+              onClick={() => handleShareLink()}
+              css={LinkButtonStyles}
+            >
+              {t("intro_primary_button")}
+            </p>
+          </div>
+        )}
+
         {/* 바텀시트 */}
         <div>
           <BottomSheet isOpen={isBottomSheetOpen} onClose={closeBottomSheet}>
