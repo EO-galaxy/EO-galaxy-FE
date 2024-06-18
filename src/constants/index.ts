@@ -1,6 +1,7 @@
 import { t } from "i18next";
+import { Video } from "../type";
 
-export const VideoList = [
+export const videoList: Video[] = [
   {
     id: 0,
     imgSrc: "/intro-image/video-0.jpg",

@@ -1,12 +1,12 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import React, { useState } from "react";
-import { VideoList } from "../../constants";
+import { videoList } from "../../constants";
 import useIsMobile from "../../hook/useIsMobile";
 
 const Carousel: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const totalSlides = VideoList.length;
+  const totalSlides = videoList.length;
   const isMobile = useIsMobile();
 
   const nextSlide = () => {
@@ -42,7 +42,7 @@ const Carousel: React.FC = () => {
             : `translateX(-${currentIndex * 300}px)`,
         }}
       >
-        {VideoList.map((image, index) => (
+        {videoList.map((image, index) => (
           <img
             key={index}
             src={image.imgSrc}
