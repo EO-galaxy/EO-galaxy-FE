@@ -101,6 +101,7 @@ function Intro() {
         {/* 공유하기 버튼 */}
         <div css={ButtonContainerStyles}>
           <button
+            id="shareLinkButton"
             className="animation"
             onClick={() => handleShareLink()}
             css={ButtonStyles}
@@ -109,6 +110,7 @@ function Intro() {
             {t("intro_primary_button")}
           </button>
           <p
+            id="moveToHomeButton"
             className="animation"
             onClick={() => navigate("/home")}
             css={LinkButtonStyles}
