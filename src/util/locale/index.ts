@@ -53,6 +53,10 @@ i18n.use(initReactI18next).init(
     interpolation: {
       escapeValue: false,
     },
+    saveMissing: true,
+    parseMissingKeyHandler: () => {
+        return;
+    }
   },
   addTranslationsToI18n,
 );
