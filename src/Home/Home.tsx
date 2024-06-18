@@ -72,8 +72,8 @@ function Home() {
           className="floating-bubble"
           style={{
             position: "absolute",
-            left: `${left}vw`, // 10 ~ 90
-            top: `${top}vh`, // 20 ~ 80
+            left: `${left}vw`,
+            top: `${top}vh`, 
             width: `${size}px`,
             height: `${size}px`,
           }}
@@ -107,7 +107,7 @@ function Home() {
   return (
     <>
       <Helmet>
-        <title>Home</title>
+        <title>EO | 우리의 EO</title>
       </Helmet>
       <main css={HomeStyles}>
         {/* 비눗방울 화면 */}

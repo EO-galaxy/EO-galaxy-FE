@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router-dom";
 import { BottomSheet } from "../components/BottomSheet";
@@ -66,16 +66,7 @@ function Intro() {
   };
 
   // 운세
-  const [randomNumber, setRandomNumber] = useState<number | null>(null);
-
-  const generateRandomNumber = () => {
-    const number = getRandomNumber(50, 100);
-    setRandomNumber(number);
-  };
-
-  useEffect(() => {
-    generateRandomNumber();
-  }, []);
+  const randomNumber = getRandomNumber(50, 100);
 
   // 랜덤 비디오
   const randomVideo = getRandomVideo();
@@ -83,7 +74,7 @@ function Intro() {
   return (
     <>
       <Helmet>
-        <title>Intro</title>
+        <title>EO | 나의 운세</title>
       </Helmet>
       <main css={IntroStyles}>
         <section css={FortuneContainerStyles}>
