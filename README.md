@@ -1,30 +1,22 @@
-# React + TypeScript + Vite
+# EO Galaxy 서비스 웹 사이트
+배포 링크 : https://eo-galaxy.vercel.app/
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 🤔 대표 트러블 슈팅
+보다 다양한 트러블 슈팅은 [Issues 페이지](https://github.com/EO-galaxy/EO-galaxy-FE/issues)에서 확인이 가능합니다.
 
-Currently, two official plugins are available:
+## 💻 EO Galaxy 서비스 화면
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**EO 종강 운세 : Onboarding 페이지**     
+- 한국어, English 언어 번역 기능
 
-## Expanding the ESLint configuration
+![2024-06-194 37 32-ezgif com-video-to-gif-converter](https://github.com/EO-galaxy/EO-galaxy-FE/assets/97885933/e82b8505-6897-408e-bae3-f188f6398d74)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+**EO 나의 운세 : Intro 페이지**        
+- 공유하기 기능
 
-- Configure the top-level `parserOptions` property like this:
+![2024-06-194 38 57-ezgif com-video-to-gif-converter](https://github.com/EO-galaxy/EO-galaxy-FE/assets/97885933/4ffbc251-ccf4-4ffb-abe1-09614b66e757)
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+**EO 우리의 EO : Home 페이지**      
+- Soap Bubble 애니메이션
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+![2024-06-194 40 23-ezgif com-video-to-gif-converter](https://github.com/EO-galaxy/EO-galaxy-FE/assets/97885933/4a41046e-c407-476a-b161-b6139e0f9545)
