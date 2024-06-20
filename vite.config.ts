@@ -10,14 +10,5 @@ export default defineConfig({
     ViteFaviconsPlugin({
       logo: "public/logo.png",
     }),
-    {
-      name: "single-page-app",
-      configureServer(server) {
-        const middleware = history();
-        server.middlewares.use((req, res, next) => {
-          middleware(req as any, res as any, next);
-        });
-      },
-    },
   ],
 });
