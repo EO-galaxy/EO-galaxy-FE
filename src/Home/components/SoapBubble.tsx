@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import gsap from "gsap";
 import { useTranslation } from "react-i18next";
 
@@ -17,6 +17,7 @@ const SoapBubble: React.FC<SoapBubbleProps> = ({
 }) => {
   const { t } = useTranslation();
   const bubbleRef = useRef<HTMLDivElement>(null);
+  const [isBubbleText, setIsBubbleText] = useState<boolean>(true);
 
   const handleClick = () => {
     if (bubbleRef.current) {
@@ -26,7 +27,9 @@ const SoapBubble: React.FC<SoapBubbleProps> = ({
         duration: 0.3,
         onComplete: () => {
           if (bubbleRef.current) {
-            bubbleRef.current.innerText = t("bubble_no");
+            setIsBubbleText(!isBubbleText);
+            const newText = isBubbleText ? t("bubble_yes") : t("bubble_no");
+            bubbleRef.current.innerText = newText;
             const randomColor = getRandomColor();
             bubbleRef.current.style.backgroundColor = randomColor;
             gsap.to(bubbleRef.current, { scale: 1, opacity: 1, duration: 0.3 });
@@ -69,10 +72,9 @@ const SoapBubble: React.FC<SoapBubbleProps> = ({
       }}
       onClick={handleClick}
     >
-      {t("bubble_yes")}
+      {isBubbleText ? t("bubble_yes") : t("bubble_no")}
     </div>
   );
 };
 
 export default SoapBubble;
-
