@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
-import { useEffect, useState } from "react";
+import { useMemo, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router-dom";
 import { BottomSheet } from "../components/BottomSheet";
@@ -12,14 +12,11 @@ import { getRandomVideo } from "../util/getRandomVideo";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import useIsEvenTime from "../hook/useEvenTime";
-import { videoList } from "../constants";
 
 function Intro() {
   const isEvenTime = useIsEvenTime();
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const [randomNumber, setRandomNumber] = useState<number>(0);
-  const [randomVideo, setRandomVideo] = useState(videoList[0]);
 
   useGSAP(() => {
     gsap.fromTo(
@@ -70,12 +67,10 @@ function Intro() {
     }
   };
 
-  useEffect(() => {
-    const num = getRandomNumber(50, 100);
-    const video = getRandomVideo();
-    setRandomNumber(num);
-    setRandomVideo(video);
-  }, []);
+  // 랜덤 운세
+  const randomNumber = useMemo(() => getRandomNumber(50, 100), []);
+  // 랜덤 비디오
+  const randomVideo = useMemo(() => getRandomVideo(), []);
 
   return (
     <>
